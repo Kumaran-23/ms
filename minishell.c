@@ -4,15 +4,15 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-/** Token types
-** builtin : builtin cmd: e.g. echo, cd
-** cmd: any type of other command
-** arg : any type of argument
-** input : '<' 
-** heredoc : '<<'
-** trunc : '>'
-** append : '>>'
-** pipe : '|' */
+// Token types
+// builtin : builtin cmd: e.g. echo, cd
+// cmd: any type of other command
+// arg : any type of argument
+// input : '<' 
+// heredoc : '<<'
+// trunc : '>'
+// append : '>>'
+// pipe : '|'
 
 # define BUILTIN 1
 # define CMD 2
@@ -23,10 +23,10 @@
 # define APPEND 7
 # define PIPE 8
 
-/* str - Token string
-** type - Token type
-** prev and next - linked list pointers to prev or next token
-*/
+// str - token string
+// type - token type
+// prev and next - linked list pointers to previous and next token
+
 typedef struct s_token
 {
 	char			*str;
@@ -39,7 +39,6 @@ typedef struct s_mini
 {
 	t_token		*tokens;
 	int			cmd;
-	int			exit;
 }	t_mini;
 
 int	ft_strcmp(char *s1, char *s2)
@@ -141,15 +140,15 @@ t_token	*new_token(t_mini *mini, char *data)
 //addes a token to the end of the list
 void	token_addend(char *data, t_mini *mini)
 {
-	t_token	*prev;
+	t_token	*tok;
 	t_token	*temp;
 
-	prev = mini->tokens;
-	while (prev->next)
-		prev = prev->next;
+	tok = mini->tokens;
+	while (tok->next)
+		tok = tok->next;
 	temp = new_token(mini, data);
-	prev->next = temp;
-	prev->next->prev = prev;
+	tok->next = temp;
+	tok->next->prev = tok;
 }
 
 //prints out the different tokens and their types
@@ -254,7 +253,6 @@ t_mini	*init_mini(void)
 	mini = (t_mini *)malloc(sizeof(t_mini));
 	mini->tokens = 0;
 	mini->cmd = 1;
-	mini->exit = 0;
 	return (mini);
 }
 
@@ -275,7 +273,7 @@ int	main(int argc, char *argv[])
 
 	init_main(argc, argv);
 	mini = init_mini();
-	while (!mini->exit)
+	while (1)
 	{
 		buff = readline("@minishell> ");
 		parse(mini, buff);
