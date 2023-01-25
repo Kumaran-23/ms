@@ -1,4 +1,5 @@
 #include "../include/minishell.h"
+#include "../libft/libft.h"
 
 int	count_argc(char **args)
 {
@@ -18,6 +19,18 @@ void	call_pipe_redirect(t_mini *mini, t_token *command, t_token *tok)
 	{
 		create_pipe(mini);
 		tok = tok->next;
+	}
+	else if (tok && (tok->type == TRUNC || tok ->type == APPEND))
+	{
+		tok = tok->next;
+		tok->type = ARG;
+		redirect_output(mini, tok, tok->prev->type);
+	}
+	else if (tok && (tok->type == INPUT))
+	{
+		tok = tok->next;
+		tok->type = ARG;
+		redirect_input(mini, tok);
 	}
 }
 

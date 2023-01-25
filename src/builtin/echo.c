@@ -1,4 +1,5 @@
 #include "../include/minishell.h"
+#include "../libft/libft.h"
 
 int	echo(int argc, char **argv)
 {

@@ -1,4 +1,5 @@
 #include "../include/minishell.h"
+#include "../libft/libft.h"
 
 void	parse(t_mini *mini, char *buff)
 {
@@ -15,4 +16,6 @@ void	parse(t_mini *mini, char *buff)
 	//print_tokens(mini->tokens);
 	execute(mini);
 	mini->cmd = 1;
+	token_free(mini->tokens);
+	agrv_free(split);
 }

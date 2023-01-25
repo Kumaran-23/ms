@@ -9,6 +9,10 @@ t_mini	*init_mini(void)
 	mini->cmd = 1;
 	mini->pipe_read = -1;
 	mini->pipe_write = -1;
+	mini->input = -1;
+	mini->output = -1;
+	mini->stdin = dup(STDIN_FILENO);
+	mini->stdout = dup(STDOUT_FILENO);
 	mini->execute_code = 0;
 	return (mini);
 }
@@ -34,6 +38,9 @@ int	main(int argc, char *argv[])
 	{
 		buff = readline("@minishell> ");
 		parse(mini, buff);
+		free(buff);
+		dup2(mini->stdin, STDIN_FILENO);
+		dup2(mini->stdout, STDOUT_FILENO);
 	}
-	return (0);
+	return (mini->execute_code);
 }

@@ -41,7 +41,7 @@ static unsigned int	ft_get_nb_strs(char const *s, char c)
 {
 	unsigned int	i;
 	unsigned int	nb_strs;
-	
+
 	i = 0;
 	nb_strs = 0;
 	if (!s[0])
@@ -67,8 +67,8 @@ static unsigned int	ft_get_nb_strs(char const *s, char c)
 
 static void	ft_get_next_str(char **next_str, unsigned int *next_str_len, char c)
 {
-	unsigned int i;
-	
+	unsigned int	i;
+
 	*next_str += *next_str_len;
 	*next_str_len = 0;
 	i = 0;
@@ -90,6 +90,7 @@ char	**ft_split(char const *s, char c)
 	unsigned int	next_str_len;
 	unsigned int	nb_strs;
 	unsigned int	i;
+
 	if (!s)
 		return (NULL);
 	nb_strs = ft_get_nb_strs(s, c);
@@ -108,18 +109,4 @@ char	**ft_split(char const *s, char c)
 	}
 	tab[i] = NULL;
 	return (tab);
-}
-
-int		main(void)
-{
-	int i = 0;
-	char **tab;
-		
-	tab = ft_split("bonjour je m'appel Arthur", 'j');
-	while (i < 4)
-	{
-		printf("string %d : %s\n", i, tab[i]);
-		i++;
-	}
-	return (0);
 }

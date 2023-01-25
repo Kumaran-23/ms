@@ -1,4 +1,5 @@
 #include "../include/minishell.h"
+#include "../libft/libft.h"
 
 //get builtin command
 int	builtin_cmd(char *token)
