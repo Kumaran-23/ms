@@ -14,6 +14,7 @@ t_mini	*init_mini(void)
 	mini->stdin = dup(STDIN_FILENO);
 	mini->stdout = dup(STDOUT_FILENO);
 	mini->execute_code = 0;
+	mini->env = NULL;
 	return (mini);
 }
 
@@ -27,6 +28,18 @@ void	init_main(int argc, char **argv)
 	}
 }
 
+static void read_input(t_mini *mini, char *input)
+{
+	
+	input = readline("@minishell> ");
+	define_signal();
+	parse(mini, input);
+	add_history(input);
+	dup2(mini->stdin, STDIN_FILENO);
+	dup2(mini->stdout, STDOUT_FILENO);
+	free(input);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_mini	*mini;
@@ -36,11 +49,8 @@ int	main(int argc, char *argv[])
 	mini = init_mini();
 	while (1)
 	{
-		buff = readline("@minishell> ");
-		parse(mini, buff);
-		free(buff);
-		dup2(mini->stdin, STDIN_FILENO);
-		dup2(mini->stdout, STDOUT_FILENO);
+		buff = NULL;
+		read_input(mini, buff);
 	}
 	return (mini->execute_code);
 }

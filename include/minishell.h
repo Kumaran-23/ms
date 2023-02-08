@@ -9,8 +9,10 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <string.h>
+# include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <termios.h>
 # include "../libft/libft.h"
 
 // Token types
@@ -55,6 +57,7 @@ typedef struct s_mini
 	int			stdin;
 	int			stdout;
 	int			execute_code;
+	t_list		*env;
 }	t_mini;
 
 //init signals, pipes etc
@@ -84,14 +87,23 @@ void	parse(t_mini *mini, char *buff);
 int		count_argc(char **args);
 void	call_pipe_redirect(t_mini *mini, t_token *command, t_token *tok);
 char	**convert_argv(t_token	*tokens);
-int		call_builtin(char **argv, char *command, t_mini *ms);
+int		call_builtin(char **argv, char *command);
 int		execute_builtin(char **argv, char *command, t_mini *ms);
+int		ft_cmd(char *str, char *lineptr);
+int		getenv_cmd(int argc, char **argv);
+char	*traverse_dir(char *path, char *exe);
+int		call_cmd(char **argv);
 int		execute(t_mini *mini);
 
 //builtin_commands
 int		echo(int argc, char **argv);
 int		pwd(void);
-int		mini_exit(t_mini *ms, char **agrv);
+int		mini_exit(void);
+int		cd(int argc, char **argv);
+
+//signal
+void	define_signal(void);
+void 	disable_veof(void);
 
 //free
 void	token_free(t_token *tok);

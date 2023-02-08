@@ -18,7 +18,9 @@ int	execute(t_mini *mini)
 		call_pipe_redirect(mini, command, tok);
 		if (command->type == BUILTIN)
 			mini->execute_code = execute_builtin(argv, command->str, mini);
-			//mini->execute_code = call_builtin(argv, command->str, mini);
+			//mini->execute_code = call_builtin(argv, command->str);
+		else if (command->type == CMD)
+			mini->execute_code = call_cmd(argv);
 		agrv_free(argv);
 	}
 	return (0);

@@ -1,8 +1,6 @@
 #include "../include/minishell.h"
 
-int	mini_exit(t_mini *ms, char **argv)
+int	mini_exit(void)
 {
 	exit(0);
-	(void)ms;
-	(void)argv;
 }

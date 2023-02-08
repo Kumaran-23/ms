@@ -5,7 +5,7 @@ LIBFT		= libft/
 SRC_DIR		= src/
 OBJ			= $(SRC:.c=.o)
 CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS		= -Wall -Werror -Wextra -g #-fsanitize=address
 RM			= rm -f
 
 GREEN		=	\033[1;92m
@@ -14,11 +14,11 @@ BLUE		=	\033[0;94m
 WHITE		=	\033[0;97m
 
 BLT_DIR		=	builtin/
-BLT_FILES	=	echo pwd exit
+BLT_FILES	=	echo pwd exit cd
 EXECUTE_DIR	=	execute/
-EXECUTE_FILES	=	execute_utils execute_builtin execute
+EXECUTE_FILES	=	execute_utils execute_builtin execute_cmd execute
 MAIN_DIR	=	main/
-MAIN_FILES	=	minishell
+MAIN_FILES	=	minishell signal
 PARSE_DIR	=	parse/
 PARSE_FILES	=	parser_utils parser pipe token redirection
 FREE_DIR	=	free/
