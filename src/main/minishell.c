@@ -32,7 +32,7 @@ static void read_input(t_mini *mini, char *input)
 {
 	
 	input = readline("@minishell> ");
-	define_signal();
+	disable_veof();
 	parse(mini, input);
 	add_history(input);
 	dup2(mini->stdin, STDIN_FILENO);
@@ -47,6 +47,7 @@ int	main(int argc, char *argv[])
 
 	init_main(argc, argv);
 	mini = init_mini();
+	define_signal();
 	while (1)
 	{
 		buff = NULL;
