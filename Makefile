@@ -43,6 +43,7 @@ $(NAME):	$(OBJ)
 			@cp libft/libft.a .
 			@$(CC) $(CFLAGS) $(OBJ) $(HEADER) libft.a -o $(NAME) -lreadline
 			@echo "$(GREEN)minishell Done!$(WHITE)"
+			@clear
 
 %.o: %.c
 			@$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
