@@ -118,8 +118,6 @@ int	it_works(char *cmd_path)
 
 	if (stat(cmd_path, &buffer) != 0)
 		return (0);
-	if ((buffer.st_mode & S_IFMT) == S_IFDIR)
-		return (0);
 	if ((buffer.st_mode & S_IXUSR))
 		return (1);
 	return (0);
