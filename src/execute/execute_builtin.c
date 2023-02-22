@@ -1,6 +1,7 @@
 #include "../include/minishell.h"
 
 //calls the builtin function for execution
+
 int	call_builtin(char **argv, char *command)
 {
 	int	argc;
@@ -14,8 +15,13 @@ int	call_builtin(char **argv, char *command)
 		builtin_cmd = pwd();
 	else if (!ft_strcmp(command, "exit"))
 		builtin_cmd = mini_exit();
-	else if (!ft_strcmp(command, "cd"))
-		builtin_cmd = cd(argc, argv);
+	//else if (!ft_strcmp(command, "cd"))
+	//	builtin_cmd = cd(argc, argv);
+	/*else if (strstr(command, "="))
+	{	
+		head = ft_var_main(*argv, head);
+		return 1;
+	}*/
 	return (builtin_cmd);
 }
 
