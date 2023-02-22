@@ -69,6 +69,7 @@ typedef struct s_global
 }	t_global;
 
 extern t_global g_global;
+extern char **environ;
 
 //parser
 int		ft_strcmp(char *s1, char *s2);
